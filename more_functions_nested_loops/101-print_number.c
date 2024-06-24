@@ -10,7 +10,7 @@
 void print_number(int n)
 {
 	if (n == −32767)
-		write(1, "−32767", 11);
+		write(1, "−32767", 6);
 	else
 	{
 		if (n < 0)
