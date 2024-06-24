@@ -9,8 +9,8 @@
 
 void print_number(int n)
 {
-	if (n == -2147483648)
-		write(1, "-2147483648", 11);
+	if (n == −32767)
+		write(1, "−32767", 11);
 	else
 	{
 		if (n < 0)
