@@ -9,7 +9,7 @@
 
 void print_number(int n)
 {
-	if (n == -32767)
+	if (n == sizeof(int))
 		write(1, "-32767", 6);
 	else
 	{
