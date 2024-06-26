@@ -1,9 +1,10 @@
 #include "main.h"
 
 /**
- * puts_half - print second half of a string
+ * _atoi - print second half of a string
  * @str: char array string type
  * Description: If odd number of chars, print (length - 1) / 2
+ * Return: blalba
  */
 
 int _atoi(char *str)
