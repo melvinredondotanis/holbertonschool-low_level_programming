@@ -17,9 +17,7 @@ int _atoi(char *str)
 	{
 		if (str[i] == '\0')
 			return (0);
-		if (str[i] == '+')
-			p_or_n *= 1;
-		else if (str[i] == '-')
+		if (str[i] == '-')
 			p_or_n *= -1;
 		i++;
 	}
