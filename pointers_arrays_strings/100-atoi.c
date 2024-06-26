@@ -22,11 +22,10 @@ int _atoi(char *str)
 		i++;
 	}
 
-	value *= p_or_n;
 	while ((str[i] >= '0') && (str[i] <= '9'))
 	{
 		value = value * 10 + (str[i] - '0');
 		i++;
 	}
-	return (value);
+	return (p_or_n * value);
 }
