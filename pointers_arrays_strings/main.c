@@ -10,7 +10,7 @@ int main(void)
 {
 	int nb;
 
-	nb = _atoi("2147483640 + 55");
+	nb = _atoi("-2147483648");
 	printf("%d\n", nb);
 	nb = _atoi("29");
 	printf("%d\n", nb);
