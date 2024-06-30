@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * isspace - Separators of words: space, tabulation, new line,
+ * is_space - Separators of words: space, tabulation, new line,
  * ,, ;, ., !, ?, ", (, ), {, and }
  * @c: an input character
  * Return: 1 if seperator, 0 otherwise
  */
-int isspace(char c)
+int is_space(char c)
 {
 	int i = 0;
 	char seperators[13] = {' ', '\t', '\n', ',', ';', '.', '!', '?',
@@ -34,7 +34,7 @@ char *cap_string(char *s)
 		if (i == 0 && (s[i] >= 'a' && s[i] <= 'z'))
 			s[i] -= 32;
 
-		if (isspace(s[i]) && (s[i + 1] >= 'a' && s[i + 1] <= 'z'))
+		if (is_space(s[i]) && (s[i + 1] >= 'a' && s[i + 1] <= 'z'))
 			s[i + 1] -= 32;
 		i++;
 	}
