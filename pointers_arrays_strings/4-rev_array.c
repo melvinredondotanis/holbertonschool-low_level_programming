@@ -1,30 +1,20 @@
 #include "main.h"
 
 /**
- * _strcat - xxxxx
- * Description:xxxx
- * @dest: xxxx
- * @src: xxxxxx
- * Return: xxx
+ * reverse_array - a function that reverse an array.
+ * @a: an input array
+ * @n: number of elements of array
+ * Return: Nothing
  */
 void reverse_array(int *a, int n)
 {
-	int i;
-	int a[n];
+	int i = 0;
+	int aux;
 
-	i = 1;
-
-	while (i < n)
+	while (i < n--)
 	{
-		a[n - i] = a[i];
-		i++;
-	}
-
-	i = 1;
-
-	while (i < n)
-	{
-		a[i] = a[i];
-		i++;
+		aux = a[i];
+		a[i++] = a[n];
+		a[n] = aux;
 	}
 }
