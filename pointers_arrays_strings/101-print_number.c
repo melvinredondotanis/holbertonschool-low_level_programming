@@ -19,10 +19,10 @@ void print_number(int n)
 		}
 		if (n > 9)
 		{
-			_putnbr(n / 10);
-			_putnbr(n % 10);
+			print_number(n / 10);
+			print_number(n % 10);
 		}
 		else
-			_putchar('0' + n);
+			print_number('0' + n);
 	}
 }
