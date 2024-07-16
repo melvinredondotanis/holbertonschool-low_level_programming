@@ -7,7 +7,6 @@
 #include <unistd.h>
 
 int _putchar(char c);
-void putstr(const char *str);
 int sum_them_all(const unsigned int n, ...);
 void print_numbers(const char *separator, const unsigned int n, ...);
 
