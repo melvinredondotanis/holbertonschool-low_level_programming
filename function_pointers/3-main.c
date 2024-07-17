@@ -1,22 +1,6 @@
 #include "3-calc.h"
 
 /**
- * _strlen - count string
- * Description: count number of char in string
- * @s: string input
- * Return: range of string
- */
-int _strlen(char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-/**
  * main - program to perform simple operations
  * @argc: argument count
  * @argv: array of arguments
@@ -37,7 +21,7 @@ int main(int argc, char **argv)
 	}
 
 	operate = get_op_func(argv[2]);
-	if (!operate || _strlen(argv[2]) > 1)
+	if (!operate || argv[2][1])
 	{
 		printf("Error\n");
 		exit(99);
