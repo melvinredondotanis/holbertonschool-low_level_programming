@@ -10,6 +10,11 @@ void putstr(const char *str)
 {
 	int i;
 
+	if (!str)
+	{
+		putstr("(nil)");
+		return;
+	}
 	i = 0;
 	while (str[i])
 	{
@@ -19,21 +24,25 @@ void putstr(const char *str)
 }
 
 /**
- * print_strings - prints strings entered as parameters using putchar
- * @separator: string to be printed between strings
- * @n: number of strings to print
- * Return: void
+ * print_strings - print strings
+ * Description: function for printing stings
+ * @separator: string input
+ * @n: number of strings
+ * Return: range of string
  */
 void print_strings(const char *separator, const unsigned int n, ...)
 {
 	va_list args;
 	unsigned int i = 0;
+	char *str;
+
 
 	va_start(args, n);
 
 	while (i < n)
 	{
-		putstr(va_arg(args, char*));
+		str = va_arg(args, char *);
+		putstr(str);
 		if (i + 1 != n && separator)
 			putstr(separator);
 		i++;
