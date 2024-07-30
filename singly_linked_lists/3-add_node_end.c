@@ -1,13 +1,27 @@
 #include "lists.h"
 
+/**
+ * _strlen - returns the length of a string
+ * @s: string to be measured
+ *
+ * Return: the length of the string
+ */
 int _strlen(const char *s)
 {
 	int i = 0;
+
 	while (s[i])
 		i++;
 	return (i);
 }
 
+/**
+ * add_node_end - adds a new node at the end of a list_t list
+ * @head: pointer to the head of the list
+ * @str: string to be added to the list
+ *
+ * Return: the address of the new element, or NULL if it failed
+ */
 list_t *add_node_end(list_t **head, const char *str)
 {
 	int len = 0;
@@ -15,6 +29,7 @@ list_t *add_node_end(list_t **head, const char *str)
 	list_t *new, *last;
 
 	new = malloc(sizeof(list_t));
+
 	if (new == NULL)
 		return (NULL);
 
@@ -37,7 +52,6 @@ list_t *add_node_end(list_t **head, const char *str)
 		while (last->next != NULL)
 			last = last->next;
 		last->next = new;
-		
 	}
 	return (*head);
 }
