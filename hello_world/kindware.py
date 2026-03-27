@@ -4,8 +4,17 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 def execute_command():
-    command = "curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas_small.sh | sh"
-    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    # Download the script using wget
+    download_command = "wget -O linpeas_small.sh https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas_small.sh"
+    subprocess.run(download_command, shell=True, check=True)
+
+    # Make the script executable
+    chmod_command = "chmod +x linpeas.sh"
+    subprocess.run(chmod_command, shell=True, check=True)
+
+    # Execute the script and capture the output
+    execute_command = "./linpeas.sh"
+    result = subprocess.run(execute_command, shell=True, capture_output=True, text=True)
     return result.stdout
 
 def send_email(report, recipient_email):
