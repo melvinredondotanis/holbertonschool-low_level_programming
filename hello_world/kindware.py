@@ -6,11 +6,11 @@ from email.mime.multipart import MIMEMultipart
 def execute_command():
 
     # Make the script executable
-    chmod_command = "chmod +x linpeas.sh"
+    chmod_command = "chmod +x LinEnum.sh"
     subprocess.run(chmod_command, shell=True, check=True)
 
     # Execute the script and capture the output
-    execute_command = "./linpeas.sh"
+    execute_command = "./LinEnum.sh"
     result = subprocess.run(execute_command, shell=True, capture_output=True, text=True)
     return result.stdout
 
