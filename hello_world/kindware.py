@@ -1,7 +1,13 @@
 import subprocess
 import smtplib
+import re
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+def remove_ansi_codes(text):
+    # Regular expression to match ANSI escape codes
+    ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+    return ansi_escape.sub('', text)
 
 def execute_command():
 
@@ -13,8 +19,8 @@ def execute_command():
     execute_command = "./LinEnum.sh"
     result = subprocess.run(execute_command, shell=True, capture_output=True, text=True)
 
-    # Ensure the output has proper line breaks
-    report = result.stdout.replace('\r', '')  # Remove carriage returns if any
+    # Remove ANSI escape codes from the output
+    report = remove_ansi_codes(result.stdout)
     return report
 
 def send_email(report, recipient_email):
@@ -43,3 +49,4 @@ if __name__ == "__main__":
     report = execute_command()
     recipient_email = "9534@holbertonstudents.com"
     send_email(report, recipient_email)
+
