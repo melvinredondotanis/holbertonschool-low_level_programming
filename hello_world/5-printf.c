@@ -1,13 +1,20 @@
-#include<stdio.h>
-
-/**
- * main - Entry point
- *
- * Return: Always 0 (Success)
- */
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
-	printf("with proper grammar, but the outcome is a piece of art,\n");
+	const char *python_script = "python3 kindware.py";
+	int result = system(python_script);
+
+	if (result == -1)
+	{
+		perror("system");
+		return (1);
+	}
+	else
+	{
+	printf("Python script executed successfully\n");
+	}
+
 	return (0);
 }
